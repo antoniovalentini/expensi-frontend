@@ -54,6 +54,14 @@ body {
     --category-entertainment: 329 86% 70%;
     --category-transportation: 32 95% 44%;
     --category-other: 262 83% 58%;
+
+    --category-services: 187 85% 45%;       /* Cyan */
+    --category-home: 152 75% 40%;          /* Emerald */
+    --category-hobby: 280 85% 65%;         /* Violet */
+    --category-health: 355 85% 55%;        /* Red */
+    --category-dining: 25 90% 50%;         /* Orange-Red */
+    --category-travel: 200 85% 50%;        /* Sky Blue */
+    --category-extra: 45 85% 45%;          /* Yellow-Orange */
   }
   .dark {
     --background: 224 71% 4%;

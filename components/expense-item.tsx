@@ -11,10 +11,17 @@ export function ExpenseItem({ expense }: ExpenseItemProps) {
   // Map category to color class
   const getCategoryColorClass = (category: string) => {
     const lowerCategory = category.toLowerCase()
-    if (lowerCategory === "food") return "bg-[hsl(var(--category-food))]"
+    if (lowerCategory === "food and household items") return "bg-[hsl(var(--category-food))]"
     if (lowerCategory === "utilities") return "bg-[hsl(var(--category-utilities))]"
     if (lowerCategory === "entertainment") return "bg-[hsl(var(--category-entertainment))]"
-    if (lowerCategory === "transportation") return "bg-[hsl(var(--category-transportation))]"
+    if (lowerCategory === "car") return "bg-[hsl(var(--category-transportation))]"
+    if (lowerCategory === "services") return "bg-[hsl(var(--category-services))]"
+    if (lowerCategory === "home") return "bg-[hsl(var(--category-home))]"
+    if (lowerCategory === "hobby") return "bg-[hsl(var(--category-hobby))]"
+    if (lowerCategory === "health") return "bg-[hsl(var(--category-health))]"
+    if (lowerCategory === "dining out") return "bg-[hsl(var(--category-dining))]"
+    if (lowerCategory === "travel") return "bg-[hsl(var(--category-travel))]"
+    if (lowerCategory === "extra") return "bg-[hsl(var(--category-extra))]"
     return "bg-[hsl(var(--category-other))]"
   }
 
