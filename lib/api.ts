@@ -1,7 +1,6 @@
 import type { Expense } from "@/types/expense"
 
 export async function fetchExpenses(): Promise<Expense[]> {
-  
   const response = await fetch('http://localhost:5038/api/expenses');
   const data = await response.json();
   return data;
