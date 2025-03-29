@@ -22,7 +22,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { toast } from "@/components/ui/use-toast"
-import { addExpense, fetchRemitters } from "@/lib/api"
+import { addExpense, fetchRemitters, fetchCategories } from "@/lib/api"
 import { useExpenses } from "@/context/expenses-context"
 
 const formSchema = z.object({
@@ -56,6 +56,7 @@ export function AddExpenseDialog({ open, onOpenChange }: AddExpenseDialogProps) 
   const [remitters, setRemitters] = useState<string[]>([])
   const [loadingRemitters, setLoadingRemitters] = useState(false)
   const { addExpense: addExpenseToContext } = useExpenses()
+  const [categories, setCategories] = useState<string[]>([])
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -94,15 +95,27 @@ export function AddExpenseDialog({ open, onOpenChange }: AddExpenseDialogProps) 
     }
   }, [open])
 
+  useEffect(() => {
+    const loadCategories = async () => {
+      const categories = await fetchCategories()
+      setCategories(categories)
+    }
+    loadCategories()
+  }, [])
+
   async function onSubmit(values: FormValues) {
     try {
       setIsSubmitting(true)
 
+      console.log(values.date.toISOString())
       // Call the API to add the expense
       const newExpense = await addExpense({
-        ...values,
-        id: crypto.randomUUID(),
-        createdById: "user-1", // In a real app, this would come from auth
+        title: values.title,
+        amount: values.amount,
+        currency: values.currency,
+        date: values.date.toISOString().split('.')[0]+'Z',
+        category: values.category,
+        remitter: values.remitter,
       })
 
       // Add the new expense to the context
@@ -218,7 +231,21 @@ export function AddExpenseDialog({ open, onOpenChange }: AddExpenseDialogProps) 
                       </FormControl>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar mode="single" selected={field.value} onSelect={field.onChange} initialFocus />
+                      <Calendar 
+                        mode="single" 
+                        selected={field.value} 
+                        onSelect={(date) => {
+                          if (date) {
+                            // Convert to UTC when date is selected
+                            const utcDate = new Date(date)
+                            utcDate.setMinutes(utcDate.getMinutes() - utcDate.getTimezoneOffset())
+                            field.onChange(utcDate)
+                          } else {
+                            field.onChange(date)
+                          }
+                        }}
+                        initialFocus 
+                      />
                     </PopoverContent>
                   </Popover>
                   <FormMessage />
@@ -239,11 +266,11 @@ export function AddExpenseDialog({ open, onOpenChange }: AddExpenseDialogProps) 
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="Food">Food</SelectItem>
-                      <SelectItem value="Utilities">Utilities</SelectItem>
-                      <SelectItem value="Entertainment">Entertainment</SelectItem>
-                      <SelectItem value="Transportation">Transportation</SelectItem>
-                      <SelectItem value="Other">Other</SelectItem>
+                      {categories.map((category) => (
+                        <SelectItem key={category} value={category}>
+                          {category}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   <FormMessage />

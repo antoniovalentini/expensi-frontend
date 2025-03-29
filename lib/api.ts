@@ -1,4 +1,4 @@
-import type { Expense } from "@/types/expense"
+import type { Expense, CreateExpenseDto } from "@/types/expense"
 
 export async function fetchExpenses(): Promise<Expense[]> {
   const response = await fetch('http://localhost:5038/api/expenses');
@@ -61,22 +61,21 @@ export async function fetchExpenses(): Promise<Expense[]> {
 }
 
 // This is a mock function that would normally post to an API
-export async function addExpense(expense: Expense): Promise<Expense> {
-  // In a real app, this would be an API call like:
-  // const response = await fetch('https://api.example.com/expenses', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify(expense),
-  // })
-  // return response.json()
+export async function addExpense(expense: CreateExpenseDto): Promise<Expense> {
+  const response = await fetch('http://localhost:5038/api/expenses', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(expense),
+  })
+  return response.json()
 
-  // For demo purposes, we'll simulate a network delay
-  await new Promise((resolve) => setTimeout(resolve, 1000))
+  // // For demo purposes, we'll simulate a network delay
+  // await new Promise((resolve) => setTimeout(resolve, 1000))
 
-  // Return the expense with an ID
-  return expense
+  // // Return the expense with an ID
+  // return expense
 }
 
 // Fetch remitters from API
@@ -89,6 +88,27 @@ export async function fetchRemitters(): Promise<string[]> {
   await new Promise((resolve) => setTimeout(resolve, 500))
 
   // Return mock remitters
-  return ["Anto", "Sara"]
+  return ["Family", "Anto", "Sara"]
+}
+
+// Fetch categories from API
+export async function fetchCategories(): Promise<string[]> {
+  // In a real app, this would be an API call
+  // const response = await fetch('http://localhost:5038/api/categories')
+  // return response.json()
+
+  // For now, return mock categories
+  return [
+    "Services",
+    "Utilities",
+    "Home",
+    "Food and Household Items",
+    "Hobby",
+    "Extra",
+    "Health",
+    "Car",
+    "Dining Out",
+    "Travel"
+  ];
 }
 
