@@ -14,7 +14,7 @@ interface ExpenseDetailDialogProps {
 }
 
 export default function ExpenseDetailDialog({ expense, isOpen, onClose, onDelete }: ExpenseDetailDialogProps) {
-  const formatDate = (date: Date) => {
+  const formatDate = (date: string) => {
     return new Date(date).toLocaleDateString("en-US", {
       weekday: "long",
       year: "numeric",
@@ -45,7 +45,7 @@ export default function ExpenseDetailDialog({ expense, isOpen, onClose, onDelete
 
             <div>
               <p className="text-sm text-muted-foreground">Date</p>
-              <p className="font-medium">{formatDate(expense.date)}</p>
+              <p className="font-medium">{formatDate(expense.referenceDate)}</p>
             </div>
 
             <div>

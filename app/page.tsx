@@ -61,7 +61,7 @@ export default function Home() {
   }
 
   const handleAddExpense = async (newExpense: ExpenseDto) => {
-    const date = new Date(newExpense.date);
+    const date = new Date(newExpense.referenceDate);
     if (selectedMonth == (date.getMonth() + 1) && selectedYear == date.getFullYear()) {
       setExpenses((prev) => [newExpense, ...prev])
     }

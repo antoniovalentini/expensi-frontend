@@ -2,7 +2,7 @@ export interface CreateExpenseDto {
   title: string
   amount: number
   currency: string
-  date: Date
+  referenceDate: string
   category: string
   remitter: string
 }
@@ -12,7 +12,7 @@ export interface ExpenseDto {
   title: string
   amount: number
   currency: string
-  date: Date
+  referenceDate: string
   category: string
   remitter: string
   createdById: string

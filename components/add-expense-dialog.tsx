@@ -18,7 +18,7 @@ import { Calendar } from "@/components/ui/calendar"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { createExpense } from "@/lib/api"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import {ExpenseDto} from "@/lib/types";
+import {CreateExpenseDto, ExpenseDto} from "@/lib/types";
 
 interface AddExpenseDialogProps {
   isOpen: boolean
@@ -71,11 +71,11 @@ export default function AddExpenseDialog({ isOpen, onClose, onAddExpense }: AddE
     setIsSubmitting(true)
 
     try {
-      const newExpense = {
+      const newExpense : CreateExpenseDto = {
         title,
         amount: Number.parseFloat(amount),
         currency: currenciesISO[currencies.indexOf(currency)],
-        date,
+        referenceDate: date.toLocaleDateString("en-CA"), // YYYY-MM-DD format
         category,
         remitter,
       }

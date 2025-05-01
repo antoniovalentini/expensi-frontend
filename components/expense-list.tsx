@@ -17,10 +17,10 @@ export default function ExpenseList({ expenses, onDelete }: ExpenseListProps) {
 
   // Sort expenses by date in descending order
   const sortedExpenses = [...expenses].sort((a, b) => {
-    return new Date(b.date).getTime() - new Date(a.date).getTime()
+    return new Date(b.referenceDate).getTime() - new Date(a.referenceDate).getTime()
   })
 
-  const formatDate = (date: Date) => {
+  const formatDate = (date: string) => {
     return new Date(date).toLocaleDateString("en-US", {
       month: "short",
       day: "numeric",
@@ -55,7 +55,7 @@ export default function ExpenseList({ expenses, onDelete }: ExpenseListProps) {
                   </div>
                   <div className="text-right">
                     <div className="font-bold text-lg">€{expense.amount.toFixed(2)}</div>
-                    <span className="text-xs text-muted-foreground">{formatDate(expense.date)}</span>
+                    <span className="text-xs text-muted-foreground">{formatDate(expense.referenceDate)}</span>
                   </div>
                 </div>
               </CardContent>
