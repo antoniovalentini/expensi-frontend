@@ -30,7 +30,7 @@ export default function ExpenseSummary({ expenses }: ExpenseSummaryProps) {
   return (
     <Card className="bg-gradient-to-br from-slate-800/40 to-teal-900/30 border-teal-700/30">
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg font-medium">Expense Summary</CardTitle>
+        <CardTitle className="text-lg font-medium">Expenses Summary</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex flex-col md:flex-row justify-between gap-6">
@@ -42,7 +42,6 @@ export default function ExpenseSummary({ expenses }: ExpenseSummaryProps) {
           </div>
 
           <div className="border-t md:border-t-0 md:border-l border-border/50 pt-4 md:pt-0 md:pl-6 flex-1">
-            <h3 className="text-sm font-medium mb-2">By Remitter</h3>
             <div className="space-y-2">
               {Object.entries(byRemitter).length > 0 ? (
                 Object.entries(byRemitter).map(([remitter, amount]) => (

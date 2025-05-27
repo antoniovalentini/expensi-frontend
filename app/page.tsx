@@ -1,13 +1,10 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Plus } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import ExpenseList from "@/components/expense-list"
 import MonthYearSelector from "@/components/month-year-selector"
 import SearchAndFilter from "@/components/search-filter"
 import ExpenseSummary from "@/components/expense-summary"
-import ExpenseChart from "@/components/expense-chart"
 import AddExpenseDialog from "@/components/add-expense-dialog"
 import { getExpensesByMonth } from "@/lib/api"
 import type { ExpenseDto } from "@/lib/types"
@@ -72,19 +69,11 @@ export default function Home() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <MonthYearSelector selectedMonth={selectedMonth} selectedYear={selectedYear} onChange={handleMonthYearChange} />
-        <Button onClick={() => setIsAddExpenseOpen(true)} className="bg-teal-600 hover:bg-teal-700">
-          <Plus className="mr-2 h-4 w-4" />
-          Add Expense
-        </Button>
-      </div>
-
       <ExpenseSummary expenses={filteredExpenses} />
 
-      <ExpenseChart currentYear={selectedYear} currentMonth={selectedMonth} />
+      <MonthYearSelector selectedMonth={selectedMonth} selectedYear={selectedYear} onChange={handleMonthYearChange} />
 
-      <SearchAndFilter onSearch={handleSearch} onCategoryFilter={handleCategoryFilter} categories={allCategories} />
+      <SearchAndFilter onSearch={handleSearch} onCategoryFilter={handleCategoryFilter} categories={allCategories} onAddExpense={() => setIsAddExpenseOpen(true)} />
 
       <ExpenseList
           expenses={filteredExpenses}

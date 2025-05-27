@@ -1,19 +1,21 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Search } from "lucide-react"
+import { Plus, Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
 import { X } from "lucide-react"
+import { Button } from "@/components/ui/button";
 
 interface SearchAndFilterProps {
   onSearch: (term: string) => void
   onCategoryFilter: (categories: string[]) => void
   categories: string[]
+  onAddExpense: () => void
 }
 
-export default function SearchAndFilter({ onSearch, onCategoryFilter, categories }: SearchAndFilterProps) {
+export default function SearchAndFilter({ onSearch, onCategoryFilter, categories, onAddExpense}: SearchAndFilterProps) {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
 
@@ -56,7 +58,7 @@ export default function SearchAndFilter({ onSearch, onCategoryFilter, categories
         />
       </div>
 
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="flex flex-wrap justify-between items-center gap-2">
         <Select onValueChange={handleCategorySelect} value="">
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Filter by category" />
@@ -87,6 +89,11 @@ export default function SearchAndFilter({ onSearch, onCategoryFilter, categories
             </button>
           )}
         </div>
+
+        <Button onClick={onAddExpense} className="bg-teal-600 hover:bg-teal-700">
+          <Plus className="mr-2 h-4 w-4"/>
+          New
+        </Button>
       </div>
     </div>
   )
