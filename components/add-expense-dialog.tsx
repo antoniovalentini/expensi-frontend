@@ -216,7 +216,7 @@ export default function AddExpenseDialog({ isOpen, onClose, onAddExpense }: AddE
             </div>
           </div>
 
-          <DialogFooter className="pt-4">
+          <DialogFooter className="pt-4 sm:gap-0 gap-4">
             <Button type="button" variant="outline" onClick={handleClose} disabled={isSubmitting}>
               Cancel
             </Button>
