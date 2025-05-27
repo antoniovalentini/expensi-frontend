@@ -39,7 +39,7 @@ export default function AddExpenseDialog({ isOpen, onClose, onAddExpense }: AddE
 
   const categories = [
     "Groceries",
-    "Food and Household Items",
+    "Food and Household",
     "Dining Out",
     "Utilities",
     "Extra",

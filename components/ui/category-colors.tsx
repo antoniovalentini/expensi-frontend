@@ -1,7 +1,7 @@
 ﻿export default function GetCategoryColor(category: string) : string {
     const colors: Record<string, string> = {
         Groceries: "bg-green-500/20 text-green-500 hover:bg-green-500/30",
-        "Food and Household Items": "bg-green-500/20 text-green-500 hover:bg-green-500/30",
+        "Food and Household": "bg-green-500/20 text-green-500 hover:bg-green-500/30",
         "Dining Out": "bg-green-500/20 text-green-500 hover:bg-green-500/30",
         Utilities: "bg-blue-500/20 text-blue-500 hover:bg-blue-500/30",
         Extra: "bg-blue-500/20 text-blue-500 hover:bg-blue-500/30",
